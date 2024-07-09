@@ -1,2 +1,3 @@
 2024-06-12T11:43:53  refactor(scan): add a fast path for the common case
 2024-07-04T18:00:00  feat(output): extract the scorer
+2024-07-09T13:17:07  chore(docs): normalize unicode before matching
