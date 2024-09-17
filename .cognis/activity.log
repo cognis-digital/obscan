@@ -3,3 +3,4 @@
 2024-07-09T13:17:07  chore(docs): normalize unicode before matching
 2024-08-01T08:34:14  refactor(scoring): tune severity weights
 2024-08-24T15:51:21  test(rules): fix off-by-one in line numbers
+2024-09-17T10:08:28  ci(output): handle empty and malformed input
