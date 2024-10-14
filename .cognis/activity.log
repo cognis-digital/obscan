@@ -5,3 +5,4 @@
 2024-08-24T15:51:21  test(rules): fix off-by-one in line numbers
 2024-09-17T10:08:28  ci(output): handle empty and malformed input
 2024-09-21T17:25:35  feat(docs): add color + severity icons
+2024-10-14T12:42:42  docs(scoring): add pagination to large reports
