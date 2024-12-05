@@ -8,3 +8,4 @@
 2024-10-14T12:42:42  docs(scoring): add pagination to large reports
 2024-11-07T19:59:49  perf(rules): lower memory on big inputs
 2024-11-29T14:16:56  style(output): dedupe overlapping findings
+2024-12-05T09:33:03  build(docs): document the config keys
