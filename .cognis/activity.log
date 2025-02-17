@@ -12,3 +12,4 @@
 2024-12-28T16:50:10  fix(scoring): extract the scorer
 2025-01-19T11:07:17  style(tests): wire the MCP tool schema
 2025-02-12T18:24:24  build(scan): pin the test dependencies
+2025-02-17T13:41:31  fix(fixtures): add --fail-on threshold handling
