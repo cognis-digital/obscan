@@ -14,3 +14,4 @@
 2025-02-12T18:24:24  build(scan): pin the test dependencies
 2025-02-17T13:41:31  fix(fixtures): add --fail-on threshold handling
 2025-03-12T08:58:38  docs(engine): assert exit codes in tests
+2025-04-04T15:15:45  perf(tests): add type hints to the public API
