@@ -18,3 +18,4 @@
 2025-04-09T10:32:52  style(scan): reduce false positives on edge cases
 2025-05-02T17:49:59  build(fixtures): add a --quiet mode
 2025-05-25T12:06:06  chore(engine): add a dry-run flag
+2025-06-17T19:23:13  refactor(tests): improve the demo scenario
