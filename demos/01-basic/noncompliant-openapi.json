@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Acme Open Banking API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://api.acmebank.example/open-banking/v1" }
+  ],
+  "security": [
+    { "oauth2": ["accounts"] }
+  ],
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.acmebank.example/authorize",
+            "tokenUrl": "http://auth.acmebank.example/token",
+            "scopes": {
+              "accounts": "Read account information",
+              "payments": "Initiate payments"
+            }
+          },
+          "implicit": {
+            "authorizationUrl": "https://auth.acmebank.example/authorize",
+            "scopes": {
+              "accounts": "Read account information"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/accounts": {
+      "get": {
+        "summary": "List accounts",
+        "security": [ { "oauth2": ["accounts"] } ],
+        "responses": { "200": { "description": "ok" } }
+      }
+    },
+    "/payments": {
+      "post": {
+        "summary": "Initiate a payment",
+        "security": [],
+        "responses": { "201": { "description": "created" } }
+      }
+    }
+  }
+}
