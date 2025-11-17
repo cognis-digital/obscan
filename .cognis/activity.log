@@ -27,3 +27,4 @@
 2025-09-27T13:05:55  feat(output): respect .gitignore when walking
 2025-10-20T08:22:02  chore(docs): add usage examples to help
 2025-11-13T15:39:09  refactor(scoring): simplify the walker
+2025-11-17T10:56:16  test(rules): improve error messages with context
