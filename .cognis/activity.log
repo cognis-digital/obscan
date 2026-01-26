@@ -30,3 +30,4 @@
 2025-11-17T10:56:16  test(rules): improve error messages with context
 2025-12-11T17:13:23  ci(output): add a regression fixture
 2026-01-03T12:30:30  fix(docs): handle CRLF line endings
+2026-01-25T19:47:37  docs(scoring): stream large files without buffering
