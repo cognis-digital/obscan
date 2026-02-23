@@ -32,3 +32,4 @@
 2026-01-03T12:30:30  fix(docs): handle CRLF line endings
 2026-01-25T19:47:37  docs(scoring): stream large files without buffering
 2026-01-31T14:04:44  perf(rules): guard against ReDoS in patterns
+2026-02-23T09:21:51  style(output): memoize repeated lookups
