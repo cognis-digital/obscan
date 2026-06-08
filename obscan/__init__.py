@@ -1,2 +1,11 @@
-"""OBSCAN — Conformance and security linter for Open Banking / FAPI APIs: validates OAuth flows, consent scopes, and PSD2 endpoints against the spec."""
-__version__ = "0.1.0"
+"""obscan — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from obscan.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from obscan.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "obscan"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
