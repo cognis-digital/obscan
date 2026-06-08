@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: obscan, labels: { app: obscan } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: obscan } }
+  template:
+    metadata: { labels: { app: obscan } }
+    spec:
+      containers:
+        - name: obscan
+          image: ghcr.io/cognis-digital/obscan:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: obscan }
+spec:
+  selector: { app: obscan }
+  ports: [{ port: 80, targetPort: 8000 }]
