@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-obscan
+pip install "git+https://github.com/cognis-digital/obscan.git"
 obscan scan .            # → prioritized findings in seconds
 ```
 
@@ -53,7 +53,7 @@ FAPI/PSD2 conformance testing is locked behind heavyweight vendor suites; a fast
 ## Quick start
 
 ```bash
-pip install cognis-obscan
+pip install "git+https://github.com/cognis-digital/obscan.git"
 obscan --version
 obscan scan .                       # scan current project
 obscan scan . --format json         # machine-readable

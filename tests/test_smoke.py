@@ -10,7 +10,6 @@ import pytest
 from obscan import (
     TOOL_NAME,
     TOOL_VERSION,
-    Severity,
     load_document,
     lint_document,
     lint_file,
