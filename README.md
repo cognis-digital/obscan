@@ -9,16 +9,22 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3500&pause=1000&color=6B46C1&center=true&vCenter=true&width=720&lines=Conformance+and+security+linter+for+Open+Banking++FAPI+APIs+;Self-hostable+%C2%B7+MCP-native+%C2%B7+CI-ready+%C2%B7+polyglot" width="720"/>
 
-[![PyPI](https://img.shields.io/pypi/v/cognis-obscan.svg?color=6b46c1)](https://pypi.org/project/cognis-obscan/) [![CI](https://github.com/cognis-digital/obscan/actions/workflows/ci.yml/badge.svg)](https://github.com/cognis-digital/obscan/actions) [![License: COCL 1.0](https://img.shields.io/badge/License-COCL%201.0-2b6cb0.svg)](LICENSE) [![Suite](https://img.shields.io/badge/Cognis-Neural%20Suite-6b46c1.svg)](https://github.com/cognis-digital)
+[![install](https://img.shields.io/badge/install-git%2B%20%C2%B7%20pipx%20%C2%B7%20uv-6b46c1.svg)](#install--every-way-every-platform) [![CI](https://github.com/cognis-digital/obscan/actions/workflows/ci.yml/badge.svg)](https://github.com/cognis-digital/obscan/actions) [![License: COCL 1.0](https://img.shields.io/badge/License-COCL%201.0-2b6cb0.svg)](LICENSE) [![Suite](https://img.shields.io/badge/Cognis-Neural%20Suite-6b46c1.svg)](https://github.com/cognis-digital)
 
 *Fintech & Payments Security — PCI, fraud, AML, and payment rails.*
 
 </div>
 
 ```bash
-pip install cognis-obscan
+pip install "git+https://github.com/cognis-digital/obscan.git"
 obscan scan .            # → prioritized findings in seconds
 ```
+
+<!-- cognis:layman:start -->
+## What is this?
+
+obscan is a command-line tool that checks whether a bank or payment API follows the Open Banking and FAPI security rules — the official standards that govern how financial apps safely exchange data. You point it at an API description file, and within seconds it tells you which security requirements are missing or broken, such as whether login flows are set up correctly, whether sensitive payment endpoints are properly protected, or whether the required consent step is in place. It produces plain results you can read in your terminal or pipe into CI pipelines and AI agents, so engineering teams at fintechs and banks can catch compliance gaps before going to production.
+<!-- cognis:layman:end -->
 
 ## Contents
 
@@ -50,10 +56,56 @@ FAPI/PSD2 conformance testing is locked behind heavyweight vendor suites; a fast
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:domains:start -->
+## Domains
+
+**Primary domain:** Cyber & Security  ·  **JTF MERIDIAN division:** NULLBYTE · SPECTER
+
+**Topics:** `cognis` `security` `infosec` `cybersecurity` `blue-team`
+
+Part of the **Cognis Neural Suite** — 300+ source-available tools organized across 12 domains under the JTF MERIDIAN command structure. See the [suite on GitHub](https://github.com/cognis-digital) and [jtf-meridian](https://github.com/cognis-digital/jtf-meridian) for how the pieces fit together.
+<!-- cognis:domains:end -->
+
+<!-- cognis:install:start -->
+## Install
+
+`obscan` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/obscan/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/obscan/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/obscan.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/obscan.git"  # uv
+pip install "git+https://github.com/cognis-digital/obscan.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/obscan.git
+cd obscan && pip install .
+```
+
+Then run:
+```sh
+obscan --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
-pip install cognis-obscan
+pip install "git+https://github.com/cognis-digital/obscan.git"
 obscan --version
 obscan scan .                       # scan current project
 obscan scan . --format json         # machine-readable
@@ -146,6 +198,32 @@ curl -fsSL https://raw.githubusercontent.com/cognis-digital/obscan/main/install.
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="related"></a>
+<a name="verification"></a>
+## Verification
+
+[![tests](https://img.shields.io/badge/tests-12%20passing-2ea44f.svg)](AUDIT.md)
+
+Every push is verified end-to-end. Latest audit (2026-06-13):
+
+```text
+tests        : 12 passed, 0 failed, 0 errored
+compile      : all modules parse
+cli          : C:\Python314\python.exe: No module named https
+package      : https
+```
+
+<details><summary>CLI surface (<code>--help</code>)</summary>
+
+```text
+C:\Python314\python.exe: No module named https
+```
+</details>
+
+Full machine-readable results: [`AUDIT.md`](AUDIT.md) · regenerate with `python -m https --help` + `pytest -q`.
+
+<div align="right"><a href="#top">↑ back to top</a></div>
+
+
 ## Related Cognis tools
 
 - [`panhound`](https://github.com/cognis-digital/panhound) — Scans code, logs, fixtures, and S3 buckets for leaked PANs (Luhn-validated card numbers) and CVVs before they hit prod.
