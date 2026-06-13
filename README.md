@@ -20,6 +20,34 @@ pip install cognis-obscan
 obscan scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+`obscan` is an Open Banking / FAPI / PSD2 conformance linter for OpenAPI
+documents. Console script: `obscan`.
+
+1. **Install** from a clone:
+   ```bash
+   pip install -e .
+   ```
+2. **Lint an OpenAPI JSON document**:
+   ```bash
+   obscan lint openapi.json
+   ```
+3. **Choose what fails the run** — by default only `error` findings fail; tighten it:
+   ```bash
+   obscan lint openapi.json --fail-on warning
+   ```
+4. **Read the output** — `--format json` for CI pipelines:
+   ```bash
+   obscan lint openapi.json --format json | jq '.'
+   ```
+   Exit codes: `0` clean at/above threshold, `1` findings at/above threshold, `2` input error.
+5. **Automate in CI** — enforce FAPI conformance on every spec change:
+   ```yaml
+   - run: pip install -e .
+   - run: obscan lint api/openapi.json --fail-on error
+   ```
+
 ## Contents
 
 - [Why obscan?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
