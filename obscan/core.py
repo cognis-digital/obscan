@@ -55,14 +55,26 @@ class DocumentError(ValueError):
 def load_document(path: str) -> dict[str, Any]:
     """Load an OpenAPI JSON document from ``path``.
 
-    Raises :class:`DocumentError` on missing file, invalid JSON, or a payload
-    that is clearly not an OpenAPI/Swagger document.
+    Raises :class:`DocumentError` on missing file, permission errors,
+    invalid JSON, or a payload that is clearly not an OpenAPI/Swagger document.
     """
+    if not path:
+        raise DocumentError("file path must not be empty")
     if not os.path.exists(path):
         raise DocumentError(f"file not found: {path}")
+    if os.path.isdir(path):
+        raise DocumentError(f"expected a file, got a directory: {path}")
     try:
         with open(path, "r", encoding="utf-8") as fh:
             data = json.load(fh)
+    except PermissionError as exc:
+        raise DocumentError(f"permission denied reading {path}") from exc
+    except OSError as exc:
+        raise DocumentError(f"could not read {path}: {exc}") from exc
+    except UnicodeDecodeError as exc:
+        raise DocumentError(
+            f"{path}: file is not valid UTF-8 — ensure the document is saved as UTF-8"
+        ) from exc
     except json.JSONDecodeError as exc:
         raise DocumentError(
             f"invalid JSON in {path}: {exc} "
@@ -403,11 +415,28 @@ def lint_document(doc: dict[str, Any], rules: list[RuleFn] | None = None) -> lis
     """Run all (or the given) rules against a loaded OpenAPI ``doc``.
 
     Findings are returned sorted by severity (most severe first) then rule id.
+    Each rule is run independently; a failure in one rule does not abort others.
     """
+    if not isinstance(doc, dict):
+        raise TypeError(f"doc must be a dict, got {type(doc).__name__!r}")
     rules = rules if rules is not None else RULES
     findings: list[Finding] = []
     for rule in rules:
-        findings.extend(rule(doc))
+        try:
+            results = rule(doc)
+        except Exception as exc:  # noqa: BLE001
+            rule_name = getattr(rule, "__name__", repr(rule))
+            findings.append(
+                Finding(
+                    "OBSCAN-INTERNAL",
+                    Severity.WARNING,
+                    f"Rule {rule_name!r} raised an unexpected exception: {exc}",
+                    "",
+                )
+            )
+            continue
+        if results:
+            findings.extend(results)
     findings.sort(key=lambda f: (-f.severity.rank, f.rule_id, f.path))
     return findings
 

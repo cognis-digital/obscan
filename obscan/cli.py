@@ -114,22 +114,37 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"{TOOL_NAME}: error: {exc}", file=sys.stderr)
         return 2
 
-    findings = lint_document(doc)
+    try:
+        findings = lint_document(doc)
+    except TypeError as exc:
+        print(f"{TOOL_NAME}: internal error: {exc}", file=sys.stderr)
+        return 2
+    except Exception as exc:  # noqa: BLE001
+        print(f"{TOOL_NAME}: unexpected error during linting: {exc}", file=sys.stderr)
+        return 2
+
     counts = summarize(findings)
     fail_on = Severity(args.fail_on)
 
-    if args.format == "json":
-        payload = {
-            "tool": TOOL_NAME,
-            "version": TOOL_VERSION,
-            "file": args.file,
-            "summary": counts,
-            "failed": has_failures(findings, fail_on),
-            "findings": [f.to_dict() for f in findings],
-        }
-        print(json.dumps(payload, indent=2))
-    else:
-        print(_render_table(args.file, findings, counts))
+    try:
+        if args.format == "json":
+            payload = {
+                "tool": TOOL_NAME,
+                "version": TOOL_VERSION,
+                "file": args.file,
+                "summary": counts,
+                "failed": has_failures(findings, fail_on),
+                "findings": [f.to_dict() for f in findings],
+            }
+            print(json.dumps(payload, indent=2))
+        else:
+            print(_render_table(args.file, findings, counts))
+    except BrokenPipeError:
+        # stdout closed mid-stream (e.g. piped to `head`); not an error.
+        pass
+    except OSError as exc:
+        print(f"{TOOL_NAME}: output error: {exc}", file=sys.stderr)
+        return 2
 
     return 1 if has_failures(findings, fail_on) else 0
 
