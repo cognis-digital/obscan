@@ -20,6 +20,64 @@ pip install cognis-obscan
 obscan scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ obscan-emit --version
+obscan 0.1.0
+```
+
+```console
+$ obscan-emit --help
+usage: obscan [-h] [--version] {lint} ...
+
+OBSCAN — Open Banking / FAPI / PSD2 conformance linter for OpenAPI documents. Fails your CI on non-compliant OAuth, consent scope and PSD2 endpoint definitions.
+
+positional arguments:
+  {lint}
+    lint      lint an OpenAPI document for Open Banking / FAPI conformance
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+
+examples:
+  obscan lint openapi.json
+  obscan lint openapi.json --format json | jq .
+  obscan lint openapi.json --fail-on warning
+```
+
+> Blocks above are real `obscan` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"Findings": [
+    {
+        "id": "1234567890",
+        "title": "Suspicious DNS Query",
+        "description": "A suspicious DNS query was detected from IP address 192.168.1.100.",
+        "severity": "high",
+        "created_at": "2023-02-15T14:30:00Z"
+    },
+    {
+        "id": "2345678901",
+        "title": "Unusual Network Traffic",
+        "description": "An unusual network traffic pattern was detected from IP address 192.168.1.101.",
+        "severity": "medium",
+        "created_at": "2023-02-15T14:31:00Z"
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 `obscan` is an Open Banking / FAPI / PSD2 conformance linter for OpenAPI

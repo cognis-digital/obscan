@@ -1,0 +1,18 @@
+$ obscan-emit --help
+
+usage: obscan [-h] [--version] {lint} ...
+
+OBSCAN — Open Banking / FAPI / PSD2 conformance linter for OpenAPI documents. Fails your CI on non-compliant OAuth, consent scope and PSD2 endpoint definitions.
+
+positional arguments:
+  {lint}
+    lint      lint an OpenAPI document for Open Banking / FAPI conformance
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+
+examples:
+  obscan lint openapi.json
+  obscan lint openapi.json --format json | jq .
+  obscan lint openapi.json --fail-on warning

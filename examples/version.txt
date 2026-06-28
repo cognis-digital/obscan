@@ -1,0 +1,3 @@
+$ obscan-emit --version
+
+obscan 0.1.0
